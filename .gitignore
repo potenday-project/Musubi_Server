@@ -1,2 +1,17 @@
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
+/.vscode
+
+#Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+#dotenv
+.env.server
+.env.db
+
+# output
+/dist

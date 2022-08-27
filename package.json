@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "description": "base code for nodejs_express projects (typescript)",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "nodemon",
-    "start": "npm run build && node build/index.js",
-    "build": "rimraf ./build && tsc"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SeungHo0422/Boilerplate_nodejs_express.git"
   },
-  "author": "Seungho Song",
+  "scripts": {
+    "server": "tsc-watch --onSuccess \"node dist/index.js\" ",
+    "build": "tsc",
+    "start": "npm run build && node ./dist"
+  },
+  "author": {
+    "name": "Seungho Song",
+    "email": "songseungho9258@gmail.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -24,7 +30,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "tsc-watch": "^5.0.3",
     "typescript": "^4.7.4"

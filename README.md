@@ -3,6 +3,7 @@
 ### Editored by Seungho Song
 
 - typescript 기반 Node.js express 의 환경 구축을 위한 BoilerPlate 코드입니다.
+- 참고 Repository : https://github.com/wlsrn3684/express-typescript-boilerplate
 
 ### 최소 요건
 
@@ -32,7 +33,8 @@
 - `@typescript-eslint/eslint-plugin`
 - `@typescript-eslint/parser`
 - `eslint` : js, ts의 디버거 역할
-- `nodemon` : 개발 시 서버 환경 자동 동기화
-- `rimraf` : 자동 rm -rf 실행
+- ~~`nodemon` : 개발 시 서버 환경 자동 동기화~~ -> tsc-watch로 전환
+- ~~`rimraf` : 자동 rm -rf 실행~~ -> unnecessary
+- `prettier` : Code Style 설정
 - `ts-node` : typescript로 node.js 작업
 - `tsc-watch` : typescript 버전 nodemon
