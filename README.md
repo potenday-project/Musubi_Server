@@ -15,11 +15,11 @@
 ### Dependencies
 
 - `bcryptjs` : 비밀번호 암호화 관련 모듈
-- `cookie-parser`
+- `cookie-parser` : 쿠키 관련 모듈
 - `cors` : CORS ERROR 관련 모듈
 - `day.js` : 날짜 관련 모듈 (moment.js 보다 이게 더 나을 듯)
-- `dotenv`
-- `express`
+- `dotenv` : env 관련 모듈
+- `express` : express 모듈
 - `jsonwebtoken` : JWT 토큰 관련 모듈
 - `swagger-ui-express` : API 리소스를 시각화
 - `typeorm` : typescript, javascript 전용 ORM 모듈
