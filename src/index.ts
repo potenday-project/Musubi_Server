@@ -1,1 +1,1 @@
-console.log("hello tsc!");
+console.log("Hello");
