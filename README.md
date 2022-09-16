@@ -1,6 +1,6 @@
 # Boilerplate_nodejs_express
 
-### Editored by Seungho Song
+### Edited by Seungho Song
 
 - typescript 기반 Node.js express 의 환경 구축을 위한 BoilerPlate 코드입니다.
 - 참고 Repository : https://github.com/wlsrn3684/express-typescript-boilerplate
@@ -9,6 +9,15 @@
 
 - Node.js v12.22.0, v14.17.0 또는 v16 이상의 최신 버전
 - Prettier, ESlint 확장 프로그램 설치 (VSCode)
+
+## 사용 방법
+
+1. git clone을 이용하여 컴퓨터에 다운
+2. 다운받은 디렉토리에서 터미널 실행 후 `npm install` 명령
+3. 실행 방법 (예제 코드 : src/index.ts)
+   1. `npm run server` : 서버(tsc-watch)
+   2. `npm run build` : 빌드
+   3. `npm run start` : 빌드 후 실행
 
 ## Modules Description
 
