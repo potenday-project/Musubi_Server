@@ -19,6 +19,10 @@
    2. `npm run build` : 빌드
    3. `npm run start` : 빌드 후 실행
 
+## 주의 사항
+
+1. @types/ 모듈과 해당 모듈의 major ver 차이가 있으면 에러의 소지가 있으니 인지할 것.
+
 ## Modules Description
 
 ### Dependencies
@@ -34,11 +38,12 @@
 - `typeorm` : typescript, javascript 전용 ORM 모듈
 - `typeorm-naming-strategies` : typeorm 중 naming 관련 모듈
 - `winston` : 향상된 로그 생성
+- `hpp`, `helmet` : 보안 관련 모듈
 
 ### Development Dependencies
 
 - `typescript`
-- `@types/node`
+- `@types/`
 - `@typescript-eslint/eslint-plugin`
 - `@typescript-eslint/parser`
 - `eslint` : js, ts의 디버거 역할
