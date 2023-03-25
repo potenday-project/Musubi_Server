@@ -5,7 +5,7 @@ const app: Application = express();
 const prod: boolean = process.env.NODE_ENV === 'production';
 
 app.get('/', (req, res) => {
-  res.send('node.js boilerplate 정상 동작!');
+  res.send('Initialized 친구비 Server!');
 });
 
 app.listen(prod ? process.env.PORT : 3065, () => {
