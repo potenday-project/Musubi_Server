@@ -16,7 +16,7 @@
     "outDir": "./dist",                                   /* Specify an output folder for all emitted files. */
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "esModuleInterop": false,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
     "forceConsistentCasingInFileNames": true,    
     "sourceMap": true,    
     "lib": ["es2015", "es2016", "es2017", "es2018", "es2019", "es2020", "es2021", "es2022"],
