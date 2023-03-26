@@ -17,7 +17,7 @@ export class Users {
   @Column()
   password!: string;
 
-  @Column()
+  @Column({type: "varchar", default: "local"})
   provider!: string;
 
   @Column()
