@@ -1,25 +1,27 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Presets } from './Presets';
-import { Friends } from './Friends';
-import { Events } from './Events';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity({ name: 'Users' })
 export class Users {
-  @PrimaryGeneratedColumn('uuid')
-  User_ID!: string;
+  // Users_ID : 해당 row를 구분하기 위한 Primary Key
+  @PrimaryGeneratedColumn('increment')
+  Users_ID!: number;
 
+  // email : 이메일을 실제 로그인 아이디로 사용
   @Column()
   email!: string;
 
   @Column()
   name!: string;
 
+  @Column({ unique: true })
+  userId!: string;
+
   @Column()
   password!: string;
 
-  @Column({type: "varchar", default: "local"})
+  @Column({ type: 'varchar', default: 'local' })
   provider!: string;
 
-  @Column()
-  snsId!: string;
+  // @Column()
+  // snsId!: string;
 }

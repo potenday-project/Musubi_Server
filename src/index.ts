@@ -3,20 +3,23 @@ import { RequestHandler, ErrorRequestHandler, Request, Response, NextFunction } 
 import morgan from 'morgan';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import expressSession from 'express-session';
+import expressSession, { MemoryStore } from 'express-session';
 import dotenv from 'dotenv';
 import passport from 'passport';
+import passportConfig from './passport';
 import hpp from 'hpp';
 import helmet from 'helmet';
 
 import { MySQLDataSource } from './data-source';
+import eventRouter from './routes/event';
+import userRouter from './routes/user';
 
 dotenv.config();
 const app = express();
 const prod: boolean = process.env.NODE_ENV === 'production';
 
 app.set('port', prod ? process.env.PORT : 3065);
-// passportConfig();
+passportConfig();
 
 // DB connection
 MySQLDataSource.initialize()
@@ -56,6 +59,7 @@ app.use(
   expressSession({
     resave: false,
     saveUninitialized: false,
+    store: new MemoryStore(),
     secret: process.env.COOKIE_SECRET!,
     cookie: {
       httpOnly: true,
@@ -65,6 +69,12 @@ app.use(
     name: 'session-cookie',
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Add Routers
+app.use('/user', userRouter)
+app.use('/event', eventRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Initialized 친구비 Server!');

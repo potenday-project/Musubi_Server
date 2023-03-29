@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 'typeorm';
-import {Users} from './Users';
+import { Users } from './Users';
 
 export enum RankType {
   NONE,
@@ -17,9 +17,9 @@ export class Friends {
   @PrimaryGeneratedColumn('increment')
   Friend_ID!: number;
 
-  @ManyToOne(() => Users, (u) => u.User_ID)
-  @JoinColumn({name: "user_id"})
-  user_id!: Users;
+  @ManyToOne(() => Users, (u) => u.userId)
+  @JoinColumn({ name: 'userId' })
+  userId!: Users;
 
   @Column()
   name!: string;

@@ -3,25 +3,32 @@ import { Users } from './Users';
 import { Friends } from './Friends';
 import { Presets } from './Presets';
 
+
 @Entity({ name: 'Events' })
 export class Events {
   @PrimaryGeneratedColumn('increment')
-  Friend_ID!: number;
+  Events_ID!: number;
 
-  @ManyToOne(() => Users, (u) => u.User_ID)
-  @JoinColumn({ name: 'user_id' })
-  user_id!: Users;
+  @ManyToOne(() => Users, (u) => u.Users_ID)
+  @JoinColumn({ name: 'userId' })
+  eventUserId!: Users;
 
-  @ManyToOne(() => Friends, (f) => f.name)
-  @JoinColumn({ name: 'friend_name' })
-  friend_name!: Friends;
+  @ManyToOne(() => Friends, (f) => f.Friend_ID)
+  @JoinColumn({ name: 'friendId' })
+  friendId!: Friends;
 
-  @ManyToOne(() => Presets, (p) => p.type)
-  @JoinColumn({ name: 'type' })
-  type!: Presets;
+  @ManyToOne(() => Presets, (p) => p.Preset_ID)
+  @JoinColumn({ name: 'presetId'})
+  presetId!: Presets;
+
+  @Column()
+  type!: number;
 
   @Column()
   title!: string;
+
+  @Column()
+  description!: string;
 
   @Column({ type: 'date' })
   eventTime!: string;

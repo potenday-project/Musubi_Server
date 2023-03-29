@@ -6,9 +6,9 @@ export class Presets {
   @PrimaryGeneratedColumn('increment')
   Preset_ID!: number;
 
-  @ManyToOne(() => Users, (user) => user.User_ID)
-  @JoinColumn({name: "user_id"})
-  user_id!: Users;
+  @ManyToOne(() => Users, (user) => user.userId)
+  @JoinColumn({ name: 'userId' })
+  userId!: Users;
 
   @Column()
   type!: string;
