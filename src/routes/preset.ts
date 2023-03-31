@@ -7,7 +7,7 @@ import { Users } from '../entity/Users';
 
 const router = express.Router();
 
-router.get('/', isLoggedIn, async (req, res, next) => {
+router.get('/:id', isLoggedIn, async (req, res, next) => {
   try {
     const presetRepository = MySQLDataSource.getRepository(Presets);
     const presets = await presetRepository.find({

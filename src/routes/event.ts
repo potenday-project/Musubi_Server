@@ -71,7 +71,7 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
         },
       };
     });
-    return res.status(200).json({ responseDTO });
+    return res.status(200).json(responseDTO);
   } catch (e) {
     console.error(e);
     return next(e);
@@ -102,7 +102,9 @@ router.post('/:id/new', isLoggedIn, async (req, res, next) => {
     if (!eventPreset) {
       return res.status(404).json({message: '해당 사용자의 프리셋이 존재하지 않습니다.'});
     }
-
+    eventFriend.rank = req.body.rank;
+    await friendRepository.save(eventFriend);
+    
     const newEvent = await eventRepository.create({
       eventUserId: req.user.Users_ID,
       friendId: eventFriend.Friend_ID,
@@ -124,37 +126,3 @@ router.post('/:id/new', isLoggedIn, async (req, res, next) => {
   }
 });
 export default router;
-
-// router.post('/new', isLoggedIn, async (req, res, next) => {
-//   try {
-//     const eventRepository = MySQLDataSource.getRepository(Events);
-//     const friendRepository = MySQLDataSource.getRepository(Friends);
-//     await console.log(req.user);
-//     const newUser = await friendRepository.findOne({
-//       where: {name: req.body.friendName}
-//     })
-//     const newEvent = await eventRepository.create({
-//       eventUserId: req.user.Users_ID,
-
-//       title: req.body.title,
-//       memo: req.body.memo,
-//       friendId: newUser!.Friend_ID,
-//       eventTime: dayjs(req.body.eventTime).toDate(),
-//       //date: string; dayjs('2023-03-30').toDate()
-//       //title: string; 일정을 등록해주세요
-//       //description: string; 쟤가 나한테 3000원 선물줌.
-//       //rank: string; 2
-//       //friendName: string; 홍길동
-//       //type: string 생일
-//     });
-//     if (!newEvent) {
-//       return res.status(404).json({ message: '일정 생성에 실패했습니다.' });
-//     }
-//     await eventRepository.save(newEvent);
-//     return res.status(200).send('신규 일정이 등록되었습니다.');
-//   } catch (err) {
-//     console.error(err);
-//     return next(err);
-//   }
-// });
-// export default router;

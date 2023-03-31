@@ -20,7 +20,7 @@ router.get('/', isLoggedIn, async (req, res, next) => {
     if (!friends) {
       return res.status(404).json({ message: '해당 사용자의 친구들이 존재하지 않습니다.' });
     }
-    return res.status(200).json({ friends });
+    return res.status(200).json(friends);
   } catch (e) {
     console.error(e);
     return next(e);
