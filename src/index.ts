@@ -13,6 +13,8 @@ import helmet from 'helmet';
 import { MySQLDataSource } from './data-source';
 import eventRouter from './routes/event';
 import userRouter from './routes/user';
+import friendRouter from './routes/friend';
+import presetRouter from './routes/preset';
 
 dotenv.config();
 const app = express();
@@ -54,6 +56,7 @@ if (prod) {
 app.use('/', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   expressSession({
@@ -75,6 +78,8 @@ app.use(passport.session());
 //Add Routers
 app.use('/user', userRouter)
 app.use('/event', eventRouter);
+app.use('/friend', friendRouter);
+app.use('/preset', presetRouter);
 
 app.get('/', (req, res, next) => {
   res.send('Initialized 친구비 Server!');

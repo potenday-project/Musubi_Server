@@ -19,7 +19,7 @@ router.post('/signup', async (req, res, next) => {
     const userRepository = MySQLDataSource.getRepository(Users);
     const exUser = await userRepository.findOne({ where: { userId: req.body.userId } });
     if (exUser) {
-      return res.status(403).send('이미 사용 중인 이메일입니다.');
+      return res.status(403).json({message: "이미 사용 중인 아이디입니다."});
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
     const newUser = await userRepository.create({
@@ -29,7 +29,7 @@ router.post('/signup', async (req, res, next) => {
       password: hashedPassword,
     });
     await userRepository.save(newUser);
-    return res.status(200).send('신규 유저가 등록되었습니다.');
+    return res.status(200).json({ message: '신규 유저가 등록되었습니다.' });
   } catch (error) {
     console.error(error);
     next(error);
