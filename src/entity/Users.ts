@@ -22,6 +22,9 @@ export class Users {
   @Column({ type: 'varchar', default: 'local' })
   provider!: string;
 
+  @Column({ type: 'bool', default: false})
+  hasPreset!: boolean;
+  
   // @Column()
   // snsId!: string;
 }

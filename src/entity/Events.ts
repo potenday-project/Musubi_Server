@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, JoinColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, JoinColumn, Column, ManyToOne, ManyToMany, JoinTable } from 'typeorm';
 import { Users } from './Users';
 import { Friends } from './Friends';
+import { EventType } from './common/Enums';
 import { Presets } from './Presets';
-
 
 @Entity({ name: 'Events' })
 export class Events {
@@ -11,25 +11,28 @@ export class Events {
 
   @ManyToOne(() => Users, (u) => u.Users_ID)
   @JoinColumn({ name: 'userId' })
-  eventUserId!: Users;
+  eventUserId!: Users | number;
 
   @ManyToOne(() => Friends, (f) => f.Friend_ID)
   @JoinColumn({ name: 'friendId' })
-  friendId!: Friends;
+  friendId!: Friends | number;
 
-  @ManyToOne(() => Presets, (p) => p.Preset_ID)
-  @JoinColumn({ name: 'presetId'})
-  presetId!: Presets;
+  @ManyToOne(() => Presets, (f) => f.Preset_ID)
+  @JoinColumn({ name: 'presetId' })
+  presetId!: Presets | number;
+
+  @Column({ type: 'varchar' })
+  friendName!: string;
 
   @Column()
-  type!: number;
+  eventType!: string;
 
   @Column()
   title!: string;
 
-  @Column()
-  description!: string;
+  @Column({ nullable: true })
+  memo!: string;
 
   @Column({ type: 'date' })
-  eventTime!: string;
+  eventTime!: Date;
 }

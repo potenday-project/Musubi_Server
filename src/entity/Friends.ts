@@ -1,35 +1,22 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from 'typeorm';
+import { RankType } from './common/Enums';
 import { Users } from './Users';
-
-export enum RankType {
-  NONE,
-  FIRST,
-  SECOND,
-  THIRD,
-  FOURTH,
-  FIFTH,
-  SIXTH,
-  SEVENTH,
-}
 
 @Entity({ name: 'Friends' })
 export class Friends {
   @PrimaryGeneratedColumn('increment')
   Friend_ID!: number;
 
-  @ManyToOne(() => Users, (u) => u.userId)
+  @ManyToOne(() => Users, (u) => u.Users_ID)
   @JoinColumn({ name: 'userId' })
-  userId!: Users;
+  friendUserId!: Users;
 
-  @Column()
+  @Column({unique: true})
   name!: string;
 
-  @Column({ type: 'enum', enum: RankType, default: RankType.NONE })
+  @Column({ type: "enum", enum: RankType, default: RankType.FOURTH })
   rank!: RankType;
 
-  @Column()
-  relationship!: string;
-
-  @Column({ type: 'date' })
-  birth!: string;
+  // @Column({ type: 'date' })
+  // birth!: string;
 }
