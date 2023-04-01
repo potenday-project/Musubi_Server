@@ -21,7 +21,7 @@ const app = express();
 const prod: boolean = process.env.NODE_ENV === 'production';
 
 let corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://friendbe.vercel.app/'],
   optionsSuccessStatus: 200,
 };
 

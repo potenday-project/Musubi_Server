@@ -36,36 +36,36 @@ router.post('/signup', async (req, res, next) => {
   }
 });
 
-// router.post('/login', async (req, res, next) => {
-//   try {
-//     const userRepository = MySQLDataSource.getRepository(Users);
-//     const eventRepository = MySQLDataSource.getRepository(Events);
+router.post('/flogin', async (req, res, next) => {
+  try {
+    const userRepository = MySQLDataSource.getRepository(Users);
+    const eventRepository = MySQLDataSource.getRepository(Events);
 
-//     const User = await userRepository.findOneBy({ userId: req.body.userId });
-//     if (!User) {
-//       return res.status(403).send('존재하지 않는 사용자입니다.');
-//     }
-//     const result = await bcrypt.compare(req.body.password, User.password);
-//     if (!result) {
-//       return res.status(403).send('비밀번호가 틀립니다.');
-//     }
-//     const UserSecure = await userRepository.findOne({
-//       where: { userId: req.body.userId },
-//       select: ['userId', 'email', 'name'],
-//     });
-//     const UserEvents = await eventRepository.find({
-//       where: { eventUserId: UserSecure! },
-//     });
-//     const fullUser = {
-//       ...UserSecure,
-//       events: UserEvents,
-//     };
-//     return res.json(fullUser);
-//   } catch (error) {
-//     console.error(error);
-//     next(error);
-//   }
-// });
+    const User = await userRepository.findOneBy({ userId: req.body.userId });
+    if (!User) {
+      return res.status(403).send('존재하지 않는 사용자입니다.');
+    }
+    const result = await bcrypt.compare(req.body.password, User.password);
+    if (!result) {
+      return res.status(403).send('비밀번호가 틀립니다.');
+    }
+    const UserSecure = await userRepository.findOne({
+      where: { userId: req.body.userId },
+      select: ['userId', 'email', 'name'],
+    });
+    const UserEvents = await eventRepository.find({
+      where: { eventUserId: req.body.userId! },
+    });
+    const fullUser = {
+      ...UserSecure,
+      events: UserEvents,
+    };
+    return res.json(fullUser);
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+});
 
 router.post('/login', isNotLoggedIn, (req, res, next) => {
   passport.authenticate('local', (err: Error, user: Users, info: { message: string }) => {
