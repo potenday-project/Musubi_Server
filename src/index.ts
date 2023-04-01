@@ -20,6 +20,11 @@ dotenv.config();
 const app = express();
 const prod: boolean = process.env.NODE_ENV === 'production';
 
+let corsOptions = {
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200,
+};
+
 app.set('port', prod ? process.env.PORT : 3065);
 passportConfig();
 
@@ -56,7 +61,7 @@ if (prod) {
 app.use('/', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   expressSession({
@@ -76,7 +81,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Add Routers
-app.use('/user', userRouter)
+app.use('/user', userRouter);
 app.use('/event', eventRouter);
 app.use('/friend', friendRouter);
 app.use('/preset', presetRouter);
@@ -87,8 +92,8 @@ app.get('/', (req, res, next) => {
 
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   console.error(err);
-  res.status(500).send('서버 에러 발생!')
-})
+  res.status(500).send('서버 에러 발생!');
+});
 
 app.listen(app.get('port'), () => {
   console.log(`server is running on ${app.get('port')}`);
