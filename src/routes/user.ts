@@ -63,8 +63,6 @@ router.post('/flogin', async (req, res, next) => {
       events: UserEvents,
     };
     return res
-      .setHeader('Access-Control-Allow-Credentials', 'true')
-      .setHeader('Access-Control-Allow-Origin', 'localhost:3000')
       .status(200)
       .json(fullUser)
   } catch (error) {

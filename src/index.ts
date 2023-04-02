@@ -50,22 +50,19 @@ if (prod) {
 } else {
   //development
   app.use(morgan('dev'));
-  app.use(
-    cors({
-      origin: ['http://localhost:3000', 'https://friendbe.vercel.app'],
-      credentials: true,
-      allowedHeaders: ['Authorization', 'Content-Type'],
-    })
-  );
 }
 
 app.use('/', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    allowedHeaders: ['Authorization', 'Content-Type'],
+    methods : ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  })
+);
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   expressSession({
