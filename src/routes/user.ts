@@ -29,7 +29,9 @@ router.post('/signup', async (req, res, next) => {
       password: hashedPassword,
     });
     await userRepository.save(newUser);
-    return res.status(200).json({ message: '신규 유저가 등록되었습니다.' });
+    return res.setHeader('Access-Control-Allow-Credentials', 'true')
+              .setHeader('Access-Control-Allow-Origin', 'localhost:3000')
+              .status(200).json({ message: '신규 유저가 등록되었습니다.' });
   } catch (error) {
     console.error(error);
     next(error);
@@ -60,7 +62,11 @@ router.post('/flogin', async (req, res, next) => {
       ...UserSecure,
       events: UserEvents,
     };
-    return res.json(fullUser);
+    return res
+      .setHeader('Access-Control-Allow-Credentials', 'true')
+      .setHeader('Access-Control-Allow-Origin', 'localhost:3000')
+      .status(200)
+      .json(fullUser)
   } catch (error) {
     console.error(error);
     next(error);
@@ -95,7 +101,9 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         //   ...UserSecure,
         //   events: UserEvents,
         // };
-        return res.json(UserSecure);
+        return res.setHeader('Access-Control-Allow-Credentials', 'true')
+                  .setHeader('Access-Control-Allow-Origin', 'localhost:3000')
+                  .status(200).json(UserSecure);
       } catch (e) {
         console.error(e);
         return next(e);

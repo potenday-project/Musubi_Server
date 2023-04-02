@@ -20,10 +20,10 @@ dotenv.config();
 const app = express();
 const prod: boolean = process.env.NODE_ENV === 'production';
 
-let corsOptions = {
-  origin: ['http://localhost:3000', 'https://friendbe.vercel.app/'],
-  optionsSuccessStatus: 200,
-};
+// let corsOptions = {
+//   origin: ['http://localhost:3000', 'https://friendbe.vercel.app/'],
+//   optionsSuccessStatus: 200,
+// };
 
 app.set('port', prod ? process.env.PORT : 3065);
 passportConfig();
@@ -52,8 +52,9 @@ if (prod) {
   app.use(morgan('dev'));
   app.use(
     cors({
-      origin: true,
+      origin: ['http://localhost:3000', 'https://friendbe.vercel.app'],
       credentials: true,
+      allowedHeaders: ['Authorization', 'Content-Type'],
     })
   );
 }
@@ -61,7 +62,10 @@ if (prod) {
 app.use('/', express.static('uploads'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors(corsOptions));
+app.use(cors({
+  origin: true,
+  credentials: true,
+}));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(
   expressSession({
